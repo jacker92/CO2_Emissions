@@ -12,7 +12,7 @@ class LineChart extends React.Component {
         options: {
           chart: {
                 zoom: {
-                    enabled: false
+                    enabled: true
                 }
             },
             colors: ['#ff0000', '#ff0000'],
@@ -28,7 +28,7 @@ class LineChart extends React.Component {
             },
             theme: {
               mode: 'dark',
-              palette: 'palette10' // upto palette10
+              palette: 'palette5' // upto palette10
             },
             grid: {
                 row: {
@@ -37,12 +37,12 @@ class LineChart extends React.Component {
                 },
             },
             xaxis: {
-                categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010'],
+                categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
             }
         },
         series: [{
             name: "Desktops",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+            data: [10, 41, 35, 51, 49, 62, 69, 91, 148,133,12, 62, 69, 91, 148,133,12, 44,88]
         }],
       }
     }
@@ -51,7 +51,7 @@ class LineChart extends React.Component {
   
       return (
         <div id="chart">
-          <ReactApexChart options={this.state.options} series={this.state.series} type="line" height="400" />
+          <ReactApexChart options={this.state.options} series={this.state.series} type="line" height="500" />
         </div>
       );
     }
