@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   sortableContainer,
   sortableElement
@@ -7,29 +7,30 @@ import arrayMove from 'array-move';
 import { classes } from 'istanbul-lib-coverage';
 import './App.css';
 
-const SortableItem = sortableElement(({value}) => (
+const SortableItem = sortableElement(({ value }) => (
   <li>
     {value}
   </li>
 ));
 
-const SortableContainer = sortableContainer(({children}) => {
+const SortableContainer = sortableContainer(({ children }) => {
   return <ul>{children}</ul>;
 });
 
 class SortableComponent extends Component {
+
   state = {
-    items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'],
+    items: this.props.data,
   };
 
-  onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({items}) => ({
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(({ items }) => ({
       items: arrayMove(items, oldIndex, newIndex),
     }));
   };
 
   render() {
-    const {items} = this.state;
+    const { items } = this.state;
 
     return (
       <SortableContainer helperClass='sortableHelper' onSortEnd={this.onSortEnd}>
