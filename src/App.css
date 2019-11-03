@@ -12,8 +12,8 @@ justify-content: center;
 }
 
 .sortableHelper {
-  margin:auto;
   left: 78% !important;
+  background-color: #4c5464 !important; 
 }
 
 .App{
@@ -137,12 +137,22 @@ margin-left:10px;
   margin-right: 2%;
 }
 
-
-#selectedList li{
-  border: 1px solid #000000; 
+#selectedList li {
+  background-color: #516690;
+}
+#selectedList li, .sortableHelper{
+  box-sizing: border-box;
+  border: 1px solid #516690; 
   list-style-type: none;
   align-items: center;
+  border-radius:2em;
+  margin:0.2em auto;
 }
+
+#selectedList li:hover{
+  color:#000000;
+  background-color: #4c5464;
+  }
 
 
 
