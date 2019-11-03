@@ -7,9 +7,11 @@ import arrayMove from 'array-move';
 import { classes } from 'istanbul-lib-coverage';
 import './App.css';
 
-const SortableItem = sortableElement(({ value }) => (
+const SortableItem = sortableElement(({ value, onRemove }) => (
   <li>
     {value}
+   <span>  </span>
+    <button className="removeButton" onClick={() => onRemove(value)}>Remove</button>
   </li>
 ));
 
@@ -27,7 +29,13 @@ class SortableComponent extends Component {
     this.setState(({ items }) => ({
       items: arrayMove(items, oldIndex, newIndex),
     }));
+
+    this.props.onSorted(this.state.items);
   };
+
+   onRemove = (value) => {
+     this.props.onRemove(value);
+    };
 
   render() {
     const { items } = this.state;
@@ -35,7 +43,7 @@ class SortableComponent extends Component {
     return (
       <SortableContainer helperClass='sortableHelper' onSortEnd={this.onSortEnd}>
         {items.map((value, index) => (
-          <SortableItem key={`item-${value}`} index={index} value={value} />
+          <SortableItem key={`item-${value}`} index={index} value={value} onRemove={this.onRemove}/>
         ))}
       </SortableContainer>
     );
