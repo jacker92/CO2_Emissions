@@ -1,13 +1,26 @@
+
 body {
   background-color: #282c34;
+  color: white;
 }
 
-.App {
+h2 {
+margin:auto;
+align-items: center;
+justify-content: center;
+}
+
+.sortableHelper {
+  margin:auto;
+  left: 78% !important;
+}
+
+.App{
   text-align: center;
 }
 
 .App-header {
-  min-height: 50vh;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,11 +75,11 @@ body {
   background-image: url('/css/searchicon.png'); /* Add a search icon to input */
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 50%;
+  width: 25%;
   font-size: 16px; /* Increase font-size */
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
-  margin-bottom: 12px; /* Add some space below the input */
+  margin-bottom: 25px; /* Add some space below the input */
 }
 
 #myUL {
@@ -76,7 +89,7 @@ body {
   margin: 0;
 }
 
-#myUL li a {
+#myUL li a, #selectedList li, .sortableHelper {
   margin:auto;
   width: 50%;
   border: 1px solid #ddd; /* Add a border to all links */
@@ -84,11 +97,45 @@ body {
   background-color: #f6f6f6; /* Grey background color */
   padding: 12px; /* Add some padding */
   text-decoration: none; /* Remove default text underline */
-  font-size: 18px; /* Increase the font-size */
+  font-size: 1em ; /* Increase the font-size */
   color: black; /* Add a black text color */
   display: block; /* Make it into a block element to fill the whole list */
 }
 
-#myUL li a:hover:not(.header) {
+#myUL li a:hover:not(.header){
   background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
+
+/* ###################### ChartContainer ########################### */
+
+#chartContainer {
+  margin-top: 1%;
+  width: 100%;
+  min-height: 40vh;
+}
+
+#chart {
+  padding-left: 3%;
+  margin:auto;
+  width: 65%;
+  display: inline-block;
+  color: #694441
+}
+
+#selectedList {
+  float: right;
+  margin: 0px;
+  padding: 0px;
+  width: 30%;
+  margin-right: 2%;
+}
+
+
+#selectedList li{
+  border: 1px solid #000000; 
+  list-style-type: none;
+  align-items: center;
+}
+
+
+
