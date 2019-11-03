@@ -51,7 +51,7 @@ class LineChart extends React.Component {
   
       return (
         <div id="chart">
-          <ReactApexChart options={this.state.options} series={this.state.series} type="line" height="500" />
+          <ReactApexChart options={this.state.options} series={this.props.data} type="line" height="500" />
         </div>
       );
     }

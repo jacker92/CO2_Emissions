@@ -5,7 +5,14 @@ import SearchBox from './searchBox.js';
 import LineChart from './LineChart.js';
 import SortableComponent from './SortableComponent.js'
 
-const selectedCountriesData = [];
+const Repo = require('./Backend/Repository.js')
+
+const allCountries = Repo.GetCountries();
+let selectedCountries = [];
+const selectedCountriesData = [{
+  name: "Testia",
+  data: [10, 41, 35, 51, 49, 62, 69, 91, 148,133,12, 62, 69, 91, 148,133,12, 44,88]
+}];
 
 class App extends React.Component {
 
@@ -13,30 +20,37 @@ class App extends React.Component {
     updateSortableList: {}
   }
 
-  dataAddedFromSearchBox = (dataFromChild) => {
-    console.log("myCallBack!");
-    if (selectedCountriesData.indexOf(dataFromChild) === -1) {
-      selectedCountriesData.push(dataFromChild);
-    }
-    this.updateSortableList();
-    console.log("selectedCountriesData: " + selectedCountriesData);
+  componentDidMount() {
+    console.log("AppComponent did mount.");
+    this.setStateToUpdateComponents();
   }
 
-  updateSortableList = () => {
-    console.log(this);
+  dataAddedFromSearchBox = (dataFromChild) => {
+    console.log("myCallBack!");
+
+    if (selectedCountries.indexOf(dataFromChild) === -1) {
+      selectedCountries.push(dataFromChild);
+    }
+    this.setStateToUpdateComponents();
+    console.log("selectedCountries: " + selectedCountries);
+
+    // Somewhere here updating the chart
+  }
+
+  setStateToUpdateComponents = () => {
     this.setState({ updateSortableList: this.state.updateSortableList });
   }
 
   onRemoveFromSortableComponent = (value) => {
-    let index = selectedCountriesData.indexOf(value);
+    let index = selectedCountries.indexOf(value);
     if (index > -1) {
-      selectedCountriesData.splice(index, 1);
+      selectedCountries.splice(index, 1);
     }
-    this.updateSortableList();
+    this.setStateToUpdateComponents();
   }
 
   onSortedFromSortableComponent = (sortedItems) => {
-    selectedCountriesData = sortedItems;
+    selectedCountries = sortedItems;
   }
 
   render() {
@@ -48,13 +62,13 @@ class App extends React.Component {
             View CO² emissions in different countries
           </p>
         </header>
-        <SearchBox callbackFromParent={this.dataAddedFromSearchBox} />
+        <SearchBox callbackFromParent={this.dataAddedFromSearchBox} data={allCountries} />
         <div id="chartContainer">
-          <LineChart />
+          <LineChart data={selectedCountriesData}/>
           <div id="selectedList">
             <h2>Selected Countries</h2>
             <SortableComponent 
-            data={selectedCountriesData} 
+            data={selectedCountries} 
             onRemove={this.onRemoveFromSortableComponent}
             onSorted={this.onSortedFromSortableComponent} />
           </div>
