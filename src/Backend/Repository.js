@@ -11,7 +11,7 @@ const GetCountryPopulation = (country) => {
         });
 
         res.on('end', () => {
-            //console.log(JSON.parse(data)[1]);
+            console.log(JSON.parse(data)[1]);
             countries.push(new Country("1", "Jaakko"));
             console.log(countries[0].name);
         });
@@ -20,9 +20,10 @@ const GetCountryPopulation = (country) => {
 }
 
 const GetCountries = () => {
+    console.log("Got the countries");
+    let data = '';
     http.get('http://api.worldbank.org/v2/country?format=json&per_page=25000', (res) => {
 
-        let data = '';
         res.on('data', (chunk) => {
             data += chunk;
         });
@@ -31,16 +32,21 @@ const GetCountries = () => {
             let test = JSON.parse(data)[1];
 
             for (let i in test) {
-                if (test[i]["id"] == "FIN") {
-                    GetCountryPopulation(test[i]["id"]);
-                }
-
+                countries.push(new Country(test[i]["id"], test[i]["name"]));
+                //GetCountryPopulation(test[i]["id"]);
             }
         });
+
     });
+    return countries;
 }
 
-GetCountries();
+module.exports = {
+    GetCountries,
+    GetCountryPopulation
+}
+
+
 
 
 // Program gets all countries first, before anything.
