@@ -3,7 +3,8 @@ const Country = require('./Country.js')
 const countries = [];
 
 const GetCountryPopulation = (country) => {
-    http.get('http://api.worldbank.org/v2/country/' + country + "/indicator/SP.POP.TOTL?per_page=25000&format=json", (res) => {
+
+  /*  http.get('http://api.worldbank.org/v2/country/' + country + "/indicator/SP.POP.TOTL?per_page=25000&format=json", (res) => {
 
         let data = '';
         res.on('data', (chunk) => {
@@ -11,12 +12,13 @@ const GetCountryPopulation = (country) => {
         });
 
         res.on('end', () => {
-            console.log(JSON.parse(data)[1]);
-            countries.push(new Country("1", "Jaakko"));
-            console.log(countries[0].name);
+            //console.log(JSON.parse(data)[1]);
+            //console.log(countries[0].name);
         });
 
     });
+    */
+    return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
 }
 
 const GetCountries = () => {
@@ -32,8 +34,8 @@ const GetCountries = () => {
             let test = JSON.parse(data)[1];
 
             for (let i in test) {
-                countries.push(new Country(test[i]["id"], test[i]["name"]));
-                //GetCountryPopulation(test[i]["id"]);
+                let pop = GetCountryPopulation(test[i]["id"]);
+                countries.push(new Country(test[i]["id"], test[i]["name"], pop));
             }
         });
 

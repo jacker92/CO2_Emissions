@@ -115,7 +115,7 @@ justify-content: center;
   min-height: 40vh;
 }
 
-#chart {
+#chart, .chart {
   padding-left: 3%;
   margin:auto;
   width: 65%;
