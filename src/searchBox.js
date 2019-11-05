@@ -2,20 +2,27 @@ import React from 'react';
 
 class SearchBoxItems extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            
+        }
+    }
+
     whenClicked = (e) => {
         this.props.parentCallback(e);
     }
 
     render() {
+
         return (
             <ul id="myUL">
-                {this.props.items.map((item, i) =>
-                    <li key={item.name} style={{ display: 'none' }}>
-                        <a onClick={this.whenClicked}>{item.name}</a>
+                {Object.keys(this.props.items).map((k) => (
+                    <li key={k} style={{ display: 'none' }}>
+                        <a onClick={this.whenClicked}>{k}</a>
                     </li>
-                )}
+                ))}       
             </ul>
-
         )
 
     }
@@ -26,7 +33,9 @@ class SearchBox extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = { }
+        this.state = {
+            data: {}
+        }
     }
 
     componentDidMount() {
@@ -38,6 +47,7 @@ class SearchBox extends React.Component {
 
     componentDidUpdate() {
         console.log("Component did update!");
+        //console.log(this.props.data);
     }
 
     whenClicked = (e) => {
@@ -58,7 +68,7 @@ class SearchBox extends React.Component {
         // This is due the first time search is triggered
         setTimeout(() => {
             // Declare variables
-            let input, filter, list, li, a, i, txtValue ;
+            let input, filter, list, li, a, i, txtValue;
             input = document.getElementById('myInput');
             list = document.getElementById('myUL');
 

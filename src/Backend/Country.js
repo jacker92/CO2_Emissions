@@ -1,8 +1,16 @@
 class Country {
-    constructor(id, name) {
+    constructor(id, name, population) {
         this.id = id;
         this.name = name;
-        this.population = {};
+        this.population = population;
+    }
+
+    populationToArray() {
+        let array = [];
+        for(let key in this.population) {
+            array.push(this.population[key]);
+        }
+        return array;
     }
 }
 

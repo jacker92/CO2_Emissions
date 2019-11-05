@@ -7,81 +7,109 @@ import SortableComponent from './SortableComponent.js'
 
 const Repo = require('./Backend/Repository.js')
 
-const allCountries = Repo.GetCountries();
-let indexi = 0;
-let selectedCountries = [];
-const selectedCountriesData = [{
-  name: "Testia",
-  data: [10, 41, 35, 51, 49, 62, 69, 91, 2, 133, 12, 62, 69, 91, 148, 133, 12, 44, 88]
-}];
-
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      chartData:{}
+      chartData: {},
+      countryData: {},
+      selectedCountries: []
     }
   }
 
-  getChartData() {
-    indexi += 1000;
-    console.log("Getting Chart Data!");
+  async GetDataFromRepository() {
 
-    this.setState({
-      chartData: {
-        labels: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
-        datasets: [
-            {
-                label: 'Population',
-                data: [indexi, 41, 35, 51, 49, 62, 69, 91, 148, 133, 12, 62, 69, 91, 148, 133, 12, 44, 88],
-                backgroundColor: '#ffffff'
-            }
-        ]
-      }
-    })
+    console.log("Getting data.");
+    await Repo.GetCountries().then(dataFromAPI => {
+      this.setState({
+        countryData: dataFromAPI
+      })
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
-  state = {
-    updateSortableList: {}
+  setChartData(countryName) {
+    if (!countryName) {
+      return;
+    }
+    console.log("Setting Chart Data!");
+    console.log(this.state.countryData[countryName]);
+    console.log(this.state.countryData[countryName].population);
   }
+
 
   componentDidMount() {
-    this.getChartData();
     console.log("AppComponent did mount.");
-    this.setStateToUpdateComponents();
+    this.setChartData();
+    this.GetDataFromRepository();
   }
 
   dataAddedFromSearchBox = (dataFromChild) => {
-      // Somewhere here updating the chart
-      selectedCountriesData[0].name = dataFromChild;
-      selectedCountriesData[0].data = Repo.GetCountryPopulation(dataFromChild);
-      
     console.log("myCallBack!");
 
-    if (selectedCountries.indexOf(dataFromChild) === -1) {
-      selectedCountries.push(dataFromChild);
+    let selectedCountriesVar = this.state.selectedCountries;
+    if (selectedCountriesVar.indexOf(dataFromChild) === -1) {
+      selectedCountriesVar.push(dataFromChild);
     }
-    console.log("selectedCountries: " + selectedCountries);
-    this.setStateToUpdateComponents();
-    console.log(selectedCountriesData);
+
+    this.setState({
+      selectedCountries: selectedCountriesVar
+    })
+
+    console.log("SelectedCountries: " + this.state.selectedCountries);
+    this.updateChartData(dataFromChild);
+
   }
 
-  setStateToUpdateComponents = () => {
-    this.setState({ updateSortableList: this.state.updateSortableList });
-    this.getChartData();
+  updateChartData = (countryName) => {
+    let countryNameVar = "";
+    if(countryName && this.state.countryData[countryName]) {
+      countryNameVar = this.state.countryData[countryName].name || "";
+    }
+
+    let dataVar = [];
+
+    if(this.state.countryData[countryName]) {
+      dataVar = this.state.countryData[countryName].populationToArray() || [];
+    }
+
+    this.setState({
+      chartData: {
+        id: '10',
+        labels: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+        datasets: [
+          {
+            label: countryNameVar + ' Population',
+            data: dataVar,
+            backgroundColor: '#ffffff'
+          }
+        ]
+      }
+    });
   }
 
   onRemoveFromSortableComponent = (value) => {
-    let index = selectedCountries.indexOf(value);
+    console.log("On REMOVE");
+    let selectedCountriesVar = this.state.selectedCountries;
+
+    let index = selectedCountriesVar.indexOf(value);
     if (index > -1) {
-      selectedCountries.splice(index, 1);
+      selectedCountriesVar.splice(index, 1);
     }
-    this.setStateToUpdateComponents();
+
+    this.setState({
+      selectedCountries: selectedCountriesVar
+    })
+
+    this.updateChartData();
   }
 
   onSortedFromSortableComponent = (sortedItems) => {
-    selectedCountries = sortedItems;
+    this.setState({
+      selectedCountries: sortedItems
+    })
   }
 
   render() {
@@ -93,13 +121,13 @@ class App extends React.Component {
             View CO² emissions in different countries
           </p>
         </header>
-        <SearchBox callbackFromParent={this.dataAddedFromSearchBox} data={allCountries} />
+        <SearchBox callbackFromParent={this.dataAddedFromSearchBox} data={this.state.countryData} />
         <div id="chartContainer">
-          <LineChart chartData={this.state.chartData}/>
+          <LineChart chartData={this.state.chartData} />
           <div id="selectedList">
             <h2>Selected Countries</h2>
             <SortableComponent
-              data={selectedCountries}
+              data={this.state.selectedCountries}
               onRemove={this.onRemoveFromSortableComponent}
               onSorted={this.onSortedFromSortableComponent} />
           </div>

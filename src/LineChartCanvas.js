@@ -24,6 +24,7 @@ class Canvas extends React.Component {
 
     render() {
         console.log("In line canvas render!");
+
         return (
             <div className='chart'>
                 <Bar

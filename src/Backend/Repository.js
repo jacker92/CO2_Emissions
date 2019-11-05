@@ -1,47 +1,48 @@
-const http = require('http');
 const Country = require('./Country.js')
 const countries = [];
 
-const GetCountryPopulation = (country) => {
+async function GetCountryPopulation(country) {
+    let population = {};
 
-  /*  http.get('http://api.worldbank.org/v2/country/' + country + "/indicator/SP.POP.TOTL?per_page=25000&format=json", (res) => {
+    const body = await fetch('http://api.worldbank.org/v2/country/' + country + "/indicator/SP.POP.TOTL?per_page=25000&date=2000:2018&format=json");
+    let json = await body.json();
+    json = json[1];
 
-        let data = '';
-        res.on('data', (chunk) => {
-            data += chunk;
-        });
+    if (json) {
+        for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            population[element.date] = element.value;
+        }
 
-        res.on('end', () => {
-            //console.log(JSON.parse(data)[1]);
-            //console.log(countries[0].name);
-        });
+    }
 
-    });
-    */
-    return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+    return new Promise((resolve, reject) => {
+        console.log("Returning population");
+        resolve(population);
+    })
 }
 
-const GetCountries = () => {
-    console.log("Got the countries");
-    let data = '';
-    http.get('http://api.worldbank.org/v2/country?format=json&per_page=25000', (res) => {
+async function GetCountries() {
+    const body = await fetch('http://api.worldbank.org/v2/country?format=json&per_page=25000');
 
-        res.on('data', (chunk) => {
-            data += chunk;
+    let test = await body.json();
+    test = test[1];
+
+    for (let i in test) {
+        await GetCountryPopulation(test[i]["id"]).then((pop) => {
+            if(Object.keys(pop).length > 0) {
+                countries[test[i]["name"]] = new Country(test[i]["id"], test[i]["name"], pop);
+            } 
         });
+    }
+    console.log("returning new promise");
+    return new Promise((resolve, reject) => {
+            resolve(countries);
+    })
 
-        res.on('end', () => {
-            let test = JSON.parse(data)[1];
-
-            for (let i in test) {
-                let pop = GetCountryPopulation(test[i]["id"]);
-                countries.push(new Country(test[i]["id"], test[i]["name"], pop));
-            }
-        });
-
-    });
-    return countries;
 }
+
+
 
 module.exports = {
     GetCountries,
