@@ -11,27 +11,39 @@ class Canvas extends React.Component {
     }
 
     componentDidUpdate() {
+        this.reference.chartInstance.update();
         console.log("LineChartCanvas did update!");
-        console.log("abc");
-        console.log(this.props.chartData);
     }
 
     static defaultProps = {
         displayTitle: true,
         displayLegend: true,
-        legendPosition: 'top',
+        legendPosition: 'top'
     }
 
     render() {
         console.log("In line canvas render!");
-
         return (
             <div className='chart'>
                 <Bar
                     data={this.props.chartData}
                     width={1}
                     height={400}
+                    ref={(reference) => this.reference = reference}
                     options={{
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    callback(value) {
+                                        if (!Number.isInteger(value) || value == 1) {
+                                            return Number(value * 100000).toLocaleString('en');
+                                        } else {
+                                            return Number(value).toLocaleString('en');
+                                        }
+                                    }
+                                }
+                            }]
+                        },
                         maintainAspectRatio: false,
                         title: {
                             display: this.props.displayTitle,
