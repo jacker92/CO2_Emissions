@@ -4,8 +4,7 @@ import Slider from './slider.js';
 import SearchBox from './searchBox.js';
 import LineChart from './LineChartCanvas.js';
 import SortableComponent from './SortableComponent.js'
-
-const Repo = require('./Backend/Repository.js')
+import ChartDataParser from './ChartDataParser.js'
 
 class App extends React.Component {
 
@@ -18,32 +17,21 @@ class App extends React.Component {
     }
   }
 
-  async GetDataFromRepository() {
-
+  async GetDataFromAPI() {
     console.log("Getting data.");
-    await Repo.GetCountries().then(dataFromAPI => {
+    await fetch("http://localhost:3001/api/population/allCountries").then(async dataFromAPI => {
+      let json = await dataFromAPI.json();
       this.setState({
-        countryData: dataFromAPI
+        countryData: json
       })
     }).catch(err => {
       console.log(err);
     });
   }
 
-  setChartData(countryName) {
-    if (!countryName) {
-      return;
-    }
-    console.log("Setting Chart Data!");
-    console.log(this.state.countryData[countryName]);
-    console.log(this.state.countryData[countryName].population);
-  }
-
-
   componentDidMount() {
     console.log("AppComponent did mount.");
-    this.setChartData();
-    this.GetDataFromRepository();
+    this.GetDataFromAPI();
   }
 
   dataAddedFromSearchBox = (dataFromChild) => {
@@ -59,34 +47,17 @@ class App extends React.Component {
     })
 
     console.log("SelectedCountries: " + this.state.selectedCountries);
-    this.updateChartData(dataFromChild);
-
+    this.updateChartData(this.state.selectedCountries);
   }
 
-  updateChartData = (countryName) => {
-    let countryNameVar = "";
-    if(countryName && this.state.countryData[countryName]) {
-      countryNameVar = this.state.countryData[countryName].name || "";
-    }
+  updateChartData = (countries) => {
+    let chartData = ChartDataParser.CreateChartData(countries, this.state.countryData);
 
-    let dataVar = [];
-
-    if(this.state.countryData[countryName]) {
-      dataVar = this.state.countryData[countryName].populationToArray() || [];
-    }
+    console.log("Returned from ChartDataParser:");
+    console.log(chartData);
 
     this.setState({
-      chartData: {
-        id: '10',
-        labels: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
-        datasets: [
-          {
-            label: countryNameVar + ' Population',
-            data: dataVar,
-            backgroundColor: '#ffffff'
-          }
-        ]
-      }
+      chartData: chartData
     });
   }
 
@@ -99,17 +70,24 @@ class App extends React.Component {
       selectedCountriesVar.splice(index, 1);
     }
 
+    console.log("Currently selected countries");
+    console.log(selectedCountriesVar);
     this.setState({
       selectedCountries: selectedCountriesVar
     })
 
-    this.updateChartData();
+    if (this.state.selectedCountries) {
+      this.updateChartData(this.state.selectedCountries);
+    } else {
+      this.updateChartData();
+    }
   }
 
   onSortedFromSortableComponent = (sortedItems) => {
     this.setState({
       selectedCountries: sortedItems
     })
+    this.updateChartData(sortedItems);
   }
 
   render() {
