@@ -1,9 +1,17 @@
-const colorArray = ["#1E0073", "#F44B27", "#F1FF88", "#A8C8F7"]
+const colorArray = ["#1E0073", "#F44B27", "#ffffff", "#F1FF88", "#A8C8F7"]
 
-const convertToDataArray = (data) => {
+const convertPopulationToDataArray = (data) => {
     let dataArray = [];
     for (let key in data.population) {
         dataArray.push(data.population[key]);
+    }
+    return dataArray;
+}
+
+const convertCo2DataToDataArray = (data) => {
+    let dataArray = [];
+    for (let key in data.co2Data) {
+        dataArray.push(data.co2Data[key]);
     }
     return dataArray;
 }
@@ -12,11 +20,11 @@ const CreateChartData = (selectedCountries, countryData) => {
 
     let chartData = [];
 
-
     if (selectedCountries) {
         console.log("Selected countries length: " + selectedCountries.length);
         for (let index = 0; index < selectedCountries.length; index++) {
 
+            let chartIndex = index * 2;
             let countryNameVar = "";
             let countryName = selectedCountries[index]
             if (countryName && countryData[countryName]) {
@@ -26,13 +34,31 @@ const CreateChartData = (selectedCountries, countryData) => {
             let dataVar = [];
 
             if (countryData[countryName]) {
-                dataVar = convertToDataArray(countryData[countryName]);
+                dataVar = convertPopulationToDataArray(countryData[countryName]);
             }
 
-            chartData[index] = {
+            chartData[chartIndex] = {
+                type: 'bar',
+                fill: 'false',
                 label: countryNameVar + ' Population',
+                yAxisID: 'Population',
                 data: dataVar,
-                backgroundColor: colorArray[index]
+                backgroundColor: colorArray[chartIndex%5]
+            }
+
+            dataVar = [];
+
+            if (countryData[countryName]) {
+                dataVar = convertCo2DataToDataArray(countryData[countryName]);
+            }
+
+            chartData[chartIndex + 1] = {
+                type: 'line',
+
+                label: countryNameVar + ' CO2 emissions',
+                yAxisID: 'CO2',
+                data: dataVar,
+                backgroundColor: colorArray[(chartIndex + 1)%5]
             }
         }
     }

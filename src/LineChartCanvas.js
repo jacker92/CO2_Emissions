@@ -28,11 +28,13 @@ class Canvas extends React.Component {
                 <Bar
                     data={this.props.chartData}
                     width={1}
-                    height={400}
+                    height={500}
                     ref={(reference) => this.reference = reference}
                     options={{
                         scales: {
                             yAxes: [{
+                                id:'Population',
+                                position:'left',
                                 ticks: {
                                     callback(value) {
                                         if (!Number.isInteger(value) || value == 1) {
@@ -42,6 +44,18 @@ class Canvas extends React.Component {
                                         }
                                     }
                                 }
+                            }, {
+                                id: "CO2",
+                                position:'right',
+                                ticks: {
+                                    callback(value) {
+                                        if ( value <= 1) {
+                                            return Number(value * 1000).toLocaleString('en');
+                                        } else {
+                                            return Number(value).toLocaleString('en');
+                                        }
+                                    }
+                                } 
                             }]
                         },
                         maintainAspectRatio: false,

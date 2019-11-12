@@ -19,7 +19,7 @@ class App extends React.Component {
 
   async GetDataFromAPI() {
     console.log("Getting data.");
-    await fetch("http://localhost:3001/api/population/allCountries").then(async dataFromAPI => {
+    await fetch("http://localhost:3001/api/co2/allCountriesWithPopulation").then(async dataFromAPI => {
       let json = await dataFromAPI.json();
       this.setState({
         countryData: json
@@ -35,9 +35,12 @@ class App extends React.Component {
   }
 
   dataAddedFromSearchBox = (dataFromChild) => {
-    console.log("myCallBack!");
 
     let selectedCountriesVar = this.state.selectedCountries;
+    if (selectedCountriesVar.length >= 5) {
+      return;
+    }
+
     if (selectedCountriesVar.indexOf(dataFromChild) === -1) {
       selectedCountriesVar.push(dataFromChild);
     }

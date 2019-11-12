@@ -116,11 +116,10 @@ justify-content: center;
 }
 
 #chart, .chart {
-  padding-left: 3%;
+  margin-left: 3%;
   margin:auto;
   width: 65%;
   display: inline-block;
-  color: #694441
 }
 
 /* ##################### SELECTED LIST ######################*/
