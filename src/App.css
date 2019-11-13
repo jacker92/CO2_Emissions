@@ -3,6 +3,7 @@ body {
   background-color: #282c34;
   color: white;
   text-align: center;
+  margin:auto;
 }
 
 h2 {
@@ -113,6 +114,7 @@ justify-content: center;
   margin-top: 1%;
   width: 100%;
   min-height: 40vh;
+  margin-bottom: 50px;
 }
 
 #chart, .chart {
@@ -120,6 +122,7 @@ justify-content: center;
   margin:auto;
   width: 65%;
   display: inline-block;
+
 }
 
 /* ##################### SELECTED LIST ######################*/
