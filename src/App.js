@@ -37,7 +37,7 @@ class App extends React.Component {
   dataAddedFromSearchBox = (dataFromChild) => {
 
     let selectedCountriesVar = this.state.selectedCountries;
-    if (selectedCountriesVar.length >= 5) {
+    if (selectedCountriesVar.length >= 3) {
       return;
     }
 
