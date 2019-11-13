@@ -1,4 +1,4 @@
-const colorArray = ["#1E0073", "#F44B27", "#ffffff", "#F1FF88", "#A8C8F7"]
+const colorArray = ["#1E0073", "#F44B27", "#ffffff", "#F1FF88", "#A8C8F7", "#9B3147"]
 
 const convertPopulationToDataArray = (data) => {
     let dataArray = [];
@@ -43,7 +43,7 @@ const CreateChartData = (selectedCountries, countryData) => {
                 label: countryNameVar + ' Population',
                 yAxisID: 'Population',
                 data: dataVar,
-                backgroundColor: colorArray[chartIndex%5]
+                backgroundColor: colorArray[chartIndex%6]
             }
 
             dataVar = [];
@@ -58,7 +58,7 @@ const CreateChartData = (selectedCountries, countryData) => {
                 label: countryNameVar + ' CO2 emissions',
                 yAxisID: 'CO2',
                 data: dataVar,
-                backgroundColor: colorArray[(chartIndex + 1)%5]
+                backgroundColor: colorArray[(chartIndex + 1)%6]
             }
         }
     }
