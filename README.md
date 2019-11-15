@@ -12,13 +12,11 @@ Sovellus on single-page application jossa käyttöliittymä sisältäisi seuraav
 - Oikealla olisi lista jossa kaikki valitut maat. Listasta voisi poistaa maita sekä muuttaa niiden järjestystä
 - Keskellä olisi itse näyttöruutu, johon tulisi pylväsdiagrammi 
 
-Seuraavat osat toteutan mikäli näen ne myöhemmin tarpeellisiksi:
-- Oikealle valittujen maiden listan viereen tulisi kaksi textboxia, jossa olisi vuosiluvut joilta tieto haetaan
-
 ## Projektissa käytettävät teknologiat
 
-Sovelluksen Frontend on toteutettu Reactin avulla.  
-Sovelluksen Backend on toteutettu Node.js:n avulla.
+- Sovelluksen Frontend on toteutettu Reactin avulla. Tämä projekti on Frontend-osuus applikaatiosta.
+- Sovelluksen Backend on toteutettu Node.js:n avulla. Backend-projektin lähdekoodi sekä API-rajapintakuvaus löytyy [täältä](https://github.com/jacker92/CO2_Emissions_Backend).
 
+## Yleistä projektista
 Sovellus käyttää World Bankin API-rajapintoja datan keräämiseen. 
 
