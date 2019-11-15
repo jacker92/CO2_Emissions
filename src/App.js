@@ -19,7 +19,13 @@ class App extends React.Component {
 
   async GetDataFromAPI() {
     console.log("Getting data.");
-    await fetch("http://localhost:3001/api/co2/allCountriesWithPopulation").then(async dataFromAPI => {
+    let url = "";
+    if (process.env.BACKEND_URL) {
+      url = process.env.BACKEND_URL;
+    } else {
+      url = "http://localhost:3001";
+    }
+    await fetch(url + "/api/co2/allCountriesWithPopulation").then(async dataFromAPI => {
       let json = await dataFromAPI.json();
       this.setState({
         countryData: json
