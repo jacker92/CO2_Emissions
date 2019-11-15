@@ -5,6 +5,7 @@ import SearchBox from './searchBox.js';
 import LineChart from './LineChartCanvas.js';
 import SortableComponent from './SortableComponent.js'
 import ChartDataParser from './ChartDataParser.js'
+import runtimeEnv from '@mars/heroku-js-runtime-env';
 
 class App extends React.Component {
 
@@ -18,7 +19,12 @@ class App extends React.Component {
   }
 
   async GetDataFromAPI() {
-    console.log(process.env);
+    const env = runtimeEnv();
+    console.log(env);
+    console.log(env.REACT_APP_HELLO);
+    console.log(env.REACT_APP_TEST);
+    console.log(env.REACT_APP_TEST2);
+    
     let url = "";
     if (process.env["BACKEND_URL"]) {
       url = process.env["BACKEND_URL"];

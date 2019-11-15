@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mars/heroku-js-runtime-env": "^3.0.2",
     "array-move": "^2.2.0",
     "chart.js": "^2.9.2",
     "react": "^16.11.0",
