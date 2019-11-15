@@ -19,9 +19,10 @@ class App extends React.Component {
 
   async GetDataFromAPI() {
     console.log("Getting data.");
+    console.log(process.env);
     let url = "";
-    if (process.env.BACKEND_URL) {
-      url = process.env.BACKEND_URL;
+    if (process.env["BACKEND_URL"]) {
+      url = process.env["BACKEND_URL"];
     } else {
       url = "http://localhost:3001";
     }
