@@ -18,7 +18,6 @@ class App extends React.Component {
   }
 
   async GetDataFromAPI() {
-    console.log("Getting data.");
     console.log(process.env);
     let url = "";
     if (process.env["BACKEND_URL"]) {
