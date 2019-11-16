@@ -25,7 +25,7 @@ class App extends React.Component {
     if (env.REACT_APP_BACKEND_URL) {
       url = env.REACT_APP_BACKEND_URL;
     } else {
-      url = "http://localhost:3001";
+      url = "http://localhost:3001/";
     }
     await fetch(url + "api/co2/allCountriesWithPopulation").then(async dataFromAPI => {
       let json = await dataFromAPI.json();
@@ -38,7 +38,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("AppComponent did mount.");
     this.GetDataFromAPI();
   }
 
@@ -57,15 +56,11 @@ class App extends React.Component {
       selectedCountries: selectedCountriesVar
     })
 
-    console.log("SelectedCountries: " + this.state.selectedCountries);
     this.updateChartData(this.state.selectedCountries);
   }
 
   updateChartData = (countries) => {
     let chartData = ChartDataParser.CreateChartData(countries, this.state.countryData);
-
-    console.log("Returned from ChartDataParser:");
-    console.log(chartData);
 
     this.setState({
       chartData: chartData
@@ -73,7 +68,6 @@ class App extends React.Component {
   }
 
   onRemoveFromSortableComponent = (value) => {
-    console.log("On REMOVE");
     let selectedCountriesVar = this.state.selectedCountries;
 
     let index = selectedCountriesVar.indexOf(value);
@@ -81,8 +75,6 @@ class App extends React.Component {
       selectedCountriesVar.splice(index, 1);
     }
 
-    console.log("Currently selected countries");
-    console.log(selectedCountriesVar);
     this.setState({
       selectedCountries: selectedCountriesVar
     })
@@ -113,13 +105,13 @@ class App extends React.Component {
         <SearchBox callbackFromParent={this.dataAddedFromSearchBox} data={this.state.countryData} />
         <div id="chartContainer">
           <LineChart chartData={this.state.chartData} />
+          </div>
           <div id="selectedList">
             <h2>Selected Countries</h2>
             <SortableComponent
               data={this.state.selectedCountries}
               onRemove={this.onRemoveFromSortableComponent}
               onSorted={this.onSortedFromSortableComponent} />
-          </div>
         </div>
       </div>
     );
