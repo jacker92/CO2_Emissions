@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Slider from './slider.js';
 import SearchBox from './searchBox.js';
 import LineChart from './LineChartCanvas.js';
 import SortableComponent from './SortableComponent.js'

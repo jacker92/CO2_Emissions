@@ -19,7 +19,7 @@ class SearchBoxItems extends React.Component {
             <ul id="myUL">
                 {Object.keys(this.props.items).map((k) => (
                     <li key={k} style={{ display: 'none' }}>
-                        <a onClick={this.whenClicked}>{k}</a>
+                        <a href="#" onClick={this.whenClicked}>{k}</a>
                     </li>
                 ))}       
             </ul>
@@ -73,7 +73,7 @@ class SearchBox extends React.Component {
             list = document.getElementById('myUL');
 
             // If no text has been provided, do not show any results
-            if (input.value.length == 0) {
+            if (input.value.length === 0) {
                 list.style.display = 'none';
             } else {
                 list.style.display = "";

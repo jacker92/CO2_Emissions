@@ -1,4 +1,4 @@
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import React from 'react';
 
 class Canvas extends React.Component {
@@ -37,7 +37,7 @@ class Canvas extends React.Component {
                                 position:'left',
                                 ticks: {
                                     callback(value) {
-                                        if (!Number.isInteger(value) || value == 1) {
+                                        if (!Number.isInteger(value) || value === 1) {
                                             return Number(value * 100000).toLocaleString('en');
                                         } else {
                                             return Number(value).toLocaleString('en');
