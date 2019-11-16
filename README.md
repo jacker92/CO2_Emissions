@@ -6,11 +6,10 @@ Tarkoituksena olisi tehdä Reaktorin kesätyön ennakkotehtävää muistuttava
 web-sovellus, jossa käyttäjällä on mahdollisuus perehtyä hiilidioksidipäästöjen
 kehittymiseen eri maissa viimeisten vuosien aikana.
 
-Sovellus on single-page application jossa käyttöliittymä sisältäisi seuraavat osat:
-- Otsikko
+Sovellus on single-page application jossa käyttöliittymä sisältää seuraavat osat:
 - Hakukenttä jossa voi hakea ja valita eri maita
-- Oikealla olisi lista jossa kaikki valitut maat. Listasta voisi poistaa maita sekä muuttaa niiden järjestystä
-- Keskellä olisi itse näyttöruutu, johon tulisi pylväsdiagrammi 
+- Oikealla on lista jossa kaikki valitut maat. Listasta voisi poistaa maita sekä muuttaa niiden järjestystä jolloin itse diagrammi päivittyy reaaliaikaisesti sen mukaan
+- Keskellä on näyttöruutu, jossa näkyy kunkin valitun maan väkiluku pylväsdiagrammina ja hiilidioksidipäästöt viivadiagrammina
 
 ## Projektissa käytettävät teknologiat
 
