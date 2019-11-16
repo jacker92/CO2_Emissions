@@ -1,141 +1,186 @@
-
 body {
-  background-color: #282c34;
-  color: white;
-  text-align: center;
-  margin:auto;
+    background-color: #282c34;
+    color: white;
+    text-align: center;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
 }
 
 h2 {
-margin:auto;
-align-items: center;
-justify-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
-.sortableHelper {
-  left: 78% !important;
-  background-color: #4c5464 !important; 
-}
-
-.App{
-  text-align: center;
+.App {
+    text-align: center;
 }
 
 .App-header {
-  min-height: 40vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #09d3ac;
+    color: #09d3ac;
 }
+
 
 /* ##################  SearchBox #################*/
 
 #myInput {
-  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-  background-position: 10px 12px; /* Position the search icon */
-  background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 25%;
-  font-size: 1em; /* Increase font-size */
-  padding: 12px 20px 12px 40px; /* Add some padding */
-  border: 1px solid #ddd; /* Add a grey border */
-  margin-bottom: 25px; /* Add some space below the input */
+    background-image: url('/css/searchicon.png');
+    /* Add a search icon to input */
+    background-position: 10px 12px;
+    /* Position the search icon */
+    background-repeat: no-repeat;
+    /* Do not repeat the icon image */
+    width: 25%;
+    font-size: 1em;
+    /* Increase font-size */
+    padding: 12px 20px 12px 40px;
+    /* Add some padding */
+    border: 1px solid #ddd;
+    /* Add a grey border */
+    margin-bottom: 25px;
+    /* Add some space below the input */
 }
 
 #myUL {
-  /* Remove default list styling */
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-#myUL li a, #selectedList li, .sortableHelper {
-  margin:auto;
-  width: 50%;
-  border: 1px solid #ddd; /* Add a border to all links */
-  margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6; /* Grey background color */
-  padding: 12px; /* Add some padding */
-  text-decoration: none; /* Remove default text underline */
-  font-size: 1em ; /* Increase the font-size */
-  color: black; /* Add a black text color */
-  display: block; /* Make it into a block element to fill the whole list */
+#myUL li a,
+.sortableHelper {
+    margin: auto;
+    width: 50%;
+    border: 1px solid #ddd;
+    /* Add a border to all links */
+    margin-top: -1px;
+    /* Prevent double borders */
+    background-color: #f6f6f6;
+    /* Grey background color */
+    padding: 12px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove default text underline */
+    font-size: 1em;
+    /* Increase the font-size */
+    color: black;
+    /* Add a black text color */
+    display: block;
+    /* Make it into a block element to fill the whole list */
 }
 
-#myUL li a:hover:not(.header){
-  background-color: #eee; /* Add a hover effect to all links, except for headers */
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    /* Add a hover effect to all links, except for headers */
 }
+
 
 /* ###################### ChartContainer ########################### */
 
 #chartContainer {
-  margin-left: 1.5%;
-  margin-right: 1.5%;
-  }
-  
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+}
+
 @media only screen and (max-width: 800px) {
-  #chartContainer {
-    margin-top: 1%;
-    width: 97%;
-    margin-bottom: 50px;
-  }
+    #chartContainer {
+        margin-top: 1%;
+        width: 97%;
+        margin-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 801px) {
-  #chartContainer {
-    margin-top: 1%;
-    width: 76%;
-    margin-bottom: 50px;
-    float: left;
-  }
+    #chartContainer {
+        margin-top: 1%;
+        width: 76%;
+        margin-bottom: 50px;
+        float: left;
+    }
 }
 
-#chart, .chart {
-  margin:auto;
-  padding: 1%;
+#chart,
+.chart {
+    margin: auto;
+    padding: 1%;
 }
+
 
 /* ##################### SELECTED LIST ######################*/
 
-.removeButton {
-margin-left:10px;
+#selectedList ul,
+.sortableHelper {
+    align-items: center !important;
+    justify-content: center;
+    margin: auto;
+    padding-left: 0;
+    margin-top: 1%;
+}
+
+#selectedList h2 {
+    align-items: center !important;
+    justify-content: center;
+    margin: auto;
 }
 
 @media only screen and (max-width: 800px) {
-  #selectedList {
-    width: 100%;
-  }
+    #selectedList {
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 801px) {
-  #selectedList {
-    width: 20%;
+    #selectedList {
+        width: 20%;
+        display: inline-block;
+    }
+}
+
+#selectedList li,
+.sortableHelper {
+    background-color: #516690;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #ffffff;
+    list-style-type: none;
+    border-radius: 2em;
+    width: 100%;
+    /* Add a border to all links */
+    margin-top: 5px;
+    /* Grey background color */
+    padding: 5px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove default text underline */
+    font-size: 1em;
+    /* Increase the font-size */
+    color: black;
+    /* Add a black text color */
+    display: block;
+    /* Make it into a block element to fill the whole list */
+    box-sizing: border-box;
+    border: 1px solid #516690;
+    list-style-type: none;
+    border-radius: 2em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     display: inline-block;
-  }
 }
 
-#selectedList li {
-  background-color: #516690;
+#selectedList li:hover {
+    color: #000000;
+    background-color: #4c5464;
 }
-#selectedList li, .sortableHelper{
-  box-sizing: border-box;
-  border: 1px solid #516690; 
-  list-style-type: none;
-  align-items: center;
-  border-radius:2em;
-  margin:0.2em auto;
-}
-
-#selectedList li:hover{
-  color:#000000;
-  background-color: #4c5464;
-  }
-
-
-

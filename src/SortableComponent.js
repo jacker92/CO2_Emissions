@@ -4,7 +4,6 @@ import {
   sortableElement
 } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
-import { classes } from 'istanbul-lib-coverage';
 import './App.css';
 
 const SortableItem = sortableElement(({ value, onRemove }) => (
