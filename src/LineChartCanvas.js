@@ -58,7 +58,7 @@ class Canvas extends React.Component {
                         },
                         title: {
                             display: this.props.displayTitle,
-                            text: 'CO2 emissions'
+                            text: 'CO2 emissions and population'
                         },
                         legend: {
                             display: this.props.displayLegend,
