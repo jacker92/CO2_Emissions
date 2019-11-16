@@ -26,7 +26,7 @@ class App extends React.Component {
     } else {
       url = "http://localhost:3001/";
     }
-    await fetch(url + "api/co2/allCountriesWithPopulation").then(async dataFromAPI => {
+    await fetch(url + "api/combined").then(async dataFromAPI => {
       let json = await dataFromAPI.json();
       this.setState({
         countryData: json
@@ -98,7 +98,7 @@ class App extends React.Component {
         <header className="App-header">
           <h1>CO² Emissions</h1>
           <p>
-            View CO² emissions in different countries
+            View CO² emissions and population in different countries
           </p>
         </header>
         <SearchBox callbackFromParent={this.dataAddedFromSearchBox} data={this.state.countryData} />
