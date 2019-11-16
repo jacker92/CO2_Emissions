@@ -27,8 +27,8 @@ class Canvas extends React.Component {
             <div className='chart'>
                 <Bar
                     data={this.props.chartData}
-                    width={1}
-                    height={500}
+                    width={null}
+                    height={null}
                     ref={(reference) => this.reference = reference}
                     options={{
                         scales: {
@@ -58,7 +58,6 @@ class Canvas extends React.Component {
                                 } 
                             }]
                         },
-                        maintainAspectRatio: false,
                         title: {
                             display: this.props.displayTitle,
                             text: 'CO2 emissions'
