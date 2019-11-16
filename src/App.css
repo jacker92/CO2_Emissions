@@ -118,6 +118,9 @@ h2 {
 
 
 /* ##################### SELECTED LIST ######################*/
+#selectedList {
+    padding-bottom: 3%;
+}
 
 #selectedList ul,
 .sortableHelper {
