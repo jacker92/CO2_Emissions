@@ -46,8 +46,7 @@ class SortableComponent extends Component {
         ))}
       </SortableContainer>
     );
-
-
+    
   }
 }
 

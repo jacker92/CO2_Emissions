@@ -12,7 +12,6 @@ class Canvas extends React.Component {
 
     componentDidUpdate() {
         this.reference.chartInstance.update();
-        console.log("LineChartCanvas did update!");
     }
 
     static defaultProps = {
@@ -22,7 +21,6 @@ class Canvas extends React.Component {
     }
 
     render() {
-        console.log("In line canvas render!");
         return (
             <div className='chart'>
                 <Bar

@@ -4,8 +4,7 @@ class SearchBoxItems extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            
+        this.state = { 
         }
     }
 
@@ -14,7 +13,6 @@ class SearchBoxItems extends React.Component {
     }
 
     render() {
-
         return (
             <ul id="myUL">
                 {Object.keys(this.props.items).map((k) => (
@@ -24,7 +22,6 @@ class SearchBoxItems extends React.Component {
                 ))}       
             </ul>
         )
-
     }
 }
 
@@ -39,20 +36,11 @@ class SearchBox extends React.Component {
     }
 
     componentDidMount() {
-        console.log("Component did mount.");
-
         let list = document.getElementById('myUL');
         list.style.display = 'none';
     }
 
-    componentDidUpdate() {
-        console.log("Component did update!");
-        //console.log(this.props.data);
-    }
-
     whenClicked = (e) => {
-        console.log(e.target.innerText + " was clicked.");
-
         let list = document.getElementById('myUL');
         let li = list.getElementsByTagName('li');
         for (let i = 0; i < li.length; i++) {
